@@ -1,11 +1,15 @@
 <?php
+require_once '../PaymentGateway/Stripe/Transaction.php';
+require_once '../PaymentGateway/Paddle/Transaction.php';
+require_once '../PaymentGateway/Paddle/CustomerProfile.php';
+require_once '../Notification/Email.php';
 
-declare(strict_types=1);
+// use PaymentGateway\Paddle\{Transaction, CustomerProfile};
+use PaymentGateway\Paddle;
+use PaymentGateway\Stripe\Transaction as StripeTransaction;
 
-require_once '../Transaction.php';
-require_once '../Customer.php';
-require_once '../PaymentProfile.php';
+$paddleTransaction = new Paddle\Transaction();
+$stripTransaction = new StripeTransaction();
+$paddleCustomerProfile = new Paddle\CustomerProfile();
 
-$transaction = new Transaction(100, 'Description 1');
-
-echo $transaction->getCustomer()?->getPaymentProfile()?->id ?? 'foo';
+var_dump($paddleTransaction, $stripTransaction, $paddleCustomerProfile);

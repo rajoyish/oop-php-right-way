@@ -1,16 +1,25 @@
 <?php
 
-use Ramsey\Uuid\UuidFactory;
+use App\StatusType;
+use App\Transaction;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use App\PaymentGateway\Paddle\Transaction;
+echo Transaction::STATUS_PAID;
 
-$paddleTransaction = new Transaction();
+echo "<hr />";
 
-var_dump($paddleTransaction);
+$transaction = new Transaction;
+echo $transaction::STATUS_PENDING;
 
-echo "<hr>";
+echo "<hr />";
 
-$id = new UuidFactory();
-echo $id->uuid4();
+echo Transaction::class; // App\Transaction
+echo "<hr />";
+
+echo StatusType::STATUS_DECLINED;
+
+echo "<hr />";
+$transaction = new Transaction;
+$transaction->setStatus(StatusType::STATUS_PENDING);
+echo $transaction->getStatus();

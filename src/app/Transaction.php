@@ -6,20 +6,22 @@ namespace App;
 
 class Transaction
 {
-	public const STATUS_PAID = 'paid';
-	public const STATUS_PENDING = 'pending';
-	public const STATUS_DECLINED = 'declined';
+	public static int $count = 0;
 
-	private string $status = self::STATUS_PENDING;
-
-	public function setStatus(string $status): self
-	{
-		$this->status = $status;
-		return $this;
+	public function __construct(
+		public int $amount,
+		public string $description
+	) {
+		self::$count++;
 	}
 
-	public function getStatus(): string
+	public static function getCount(): int
 	{
-		return $this->status;
+		return self::$count;
+	}
+
+	public function process()
+	{
+		echo "Processing transaction of $this->amount for $this->description.";
 	}
 }
